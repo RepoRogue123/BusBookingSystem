@@ -8,6 +8,7 @@ import SeatSelection from "../components/SeatSelection";
 import { getCapacityColors } from "../helpers/capacityColors";
 import { Helmet } from "react-helmet";
 import moment from "moment";
+import { useNotifications } from "../contexts/NotificationContext";
 
 function BookNow() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function BookNow() {
   const params = useParams();
   const dispatch = useDispatch();
   const [bus, setBus] = useState(null);
+  const { refresh: refreshNotifications, fetchUnreadCount } = useNotifications();
 
   const getBus = useCallback(async () => {
     try {
@@ -46,6 +48,14 @@ function BookNow() {
       dispatch(HideLoading());
       if (response.data.success) {
         message.success(response.data.message);
+        // Refresh notifications so the bell updates immediately
+        try {
+          await fetchUnreadCount();
+          // Optionally refresh list too
+          refreshNotifications();
+        } catch (e) {
+          // Non-blocking
+        }
         navigate("/bookings");
       } else {
         message.error(response.data.message);
@@ -110,7 +120,7 @@ function BookNow() {
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-bold ${capacityInfo.backgroundColor} ${capacityInfo.textColor} border ${capacityInfo.borderColor}`}
                     >
-                      {capacityInfo.status}
+                      {capacityInfo.percentage}% booked
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -132,7 +142,7 @@ function BookNow() {
                       <p className={`text-2xl font-bold ${capacityInfo.textColor}`}>
                         {capacityInfo.percentage}%
                       </p>
-                      <p className="text-gray-600 text-sm">Full</p>
+                      <p className="text-gray-600 text-sm">booked</p>
                     </div>
                   </div>
                 </div>

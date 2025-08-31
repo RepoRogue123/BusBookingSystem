@@ -16,6 +16,7 @@ const AdminUsers = lazy(() => import("./pages/Admin/AdminUsers"));
 const Home = lazy(() => import("./pages/Home"));
 const BookNow = lazy(() => import("./pages/BookNow"));
 const Bookings = lazy(() => import("./pages/Bookings"));
+const NotificationSettings = lazy(() => import("./components/NotificationSettings"));
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -35,7 +36,7 @@ function App() {
             />
 
             <Route
-              path="/easy-booking"
+              path="/raasta"
               element={
                 <ProtectedRoute>
                   <Home />
@@ -48,6 +49,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Bookings />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/notification-settings"
+              element={
+                <ProtectedRoute>
+                  <NotificationSettings />
                 </ProtectedRoute>
               }
             />

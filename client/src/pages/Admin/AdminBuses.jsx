@@ -82,7 +82,7 @@ function AdminBuses() {
                 {capacityInfo.percentage}%
               </div>
               <div className={`text-xs font-medium ${capacityInfo.textColor}`}>
-                {capacityInfo.status}
+                booked
               </div>
               <div className="text-xs text-gray-600">
                 {record.seatsBooked?.length || 0}/{capacity} seats

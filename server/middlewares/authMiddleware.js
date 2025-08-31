@@ -10,7 +10,10 @@ module.exports = (req, res, next) => {
       });
     }
     const decodedToken = jwt.verify(token, process.env.jwt_secret);
-    req.params.userId = decodedToken.userId;
+  // Backward compatibility for routes using params
+  req.params.userId = decodedToken.userId;
+  // Standard way used by most controllers
+  req.user = { id: decodedToken.userId };
     next();
   } catch (error) {
     res.status(401).send({

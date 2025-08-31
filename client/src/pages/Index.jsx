@@ -44,7 +44,7 @@ function Index() {
   return (
     <>
       <Helmet>
-        <title>Easy-Booking</title>
+        <title>Raasta</title>
       </Helmet>
 
       <div className="h-screen flex flex-col lg:flex-row bg-gray-900">
@@ -79,14 +79,14 @@ function Index() {
             <div className="flex justify-center mb-4">
               <img
                 src={logo}
-                alt="logo"
+                alt="Raasta Logo"
                 className="w-20 h-20 rounded-full shadow-md"
               />
             </div>
 
             {/* Title + Tagline */}
             <h1 className="mb-4 text-4xl lg:text-5xl font-bold text-white">
-              Easy-Booking
+              Raasta
             </h1>
             <p className="mb-6 text-lg text-gray-300">
               Book your bus tickets online, fast and hassle-free.

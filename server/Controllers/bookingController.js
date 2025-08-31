@@ -1,6 +1,7 @@
 const Booking = require("../models/bookingsModel");
 const Bus = require("../models/busModel");
 const User = require("../models/usersModel");
+const { CreateNotification } = require("./notificationController");
 
 const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
@@ -52,6 +53,22 @@ const BookSeat = async (req, res) => {
         console.log("Email sent!!!");
       }
     });
+    // Create notification for successful booking
+    try {
+      await CreateNotification(user._id, {
+        type: "booking",
+        title: "Booking Confirmed!",
+        message: `Your booking for ${bus.name} from ${bus.from} to ${bus.to} has been confirmed. Seats: ${req.body.seats.join(', ')}`,
+        data: {
+          bookingId: newBooking._id,
+          busId: bus._id,
+          seats: req.body.seats
+        }
+      });
+    } catch (notificationError) {
+      console.error("Error creating notification:", notificationError);
+    }
+
     res.status(200).send({
       message: "Seat booked successfully",
       data: newBooking,
@@ -118,6 +135,22 @@ const CancelBooking = async (req, res) => {
         data: error,
         success: false,
       });
+    }
+
+    // Create notification for booking cancellation
+    try {
+      await CreateNotification(user._id, {
+        type: "system",
+        title: "Booking Cancelled",
+        message: `Your booking for ${bus.name} from ${bus.from} to ${bus.to} has been cancelled. Seats: ${booking.seats.join(', ')}`,
+        data: {
+          bookingId: booking._id,
+          busId: bus._id,
+          seats: booking.seats
+        }
+      });
+    } catch (notificationError) {
+      console.error("Error creating notification:", notificationError);
     }
 
     booking.remove();
