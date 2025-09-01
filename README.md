@@ -257,8 +257,11 @@ reporogue123-busbookingsystem/
 
 ### High-Level Flow
 
-![Booking Flow](./img/booking_flow.png)
-*End-to-end booking flow overview*
+![Sequence Diagram – Booking](./img/seq_booking_diagram.png)
+*Sequence for a user booking seats*
+
+![Sequence Diagram – Notification](./img/seq_notification.png)
+*Sequence for creating and fetching notifications*
 
 1. **Client** (React + Redux) handles routing, state, and UI.
 2. **Axios instance** injects JWT from localStorage into `Authorization` headers.
@@ -270,6 +273,12 @@ reporogue123-busbookingsystem/
 
 ![ER Diagram](./img/ER_diagram.png)
 *Entity-Relationship diagram: User ↔ Booking ↔ Bus; User ↔ Notification; User ↔ Preferences*
+
+![State Diagram – Booking](./img/State_booking.png)
+*States for a booking: created → confirmed → canceled*
+
+![Activity Diagram – Booking Flow](./img/activity_state_booking.png)
+*Activities through the booking process*
 
 **Core entities (simplified):**
 
