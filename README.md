@@ -261,6 +261,7 @@ reporogue123-busbookingsystem/
 *Sequence for a user booking seats*
 
 ![Sequence Diagram – Notification](./img/seq_notification.png)
+
 *Sequence for creating and fetching notifications*
 
 1. **Client** (React + Redux) handles routing, state, and UI.
@@ -275,9 +276,11 @@ reporogue123-busbookingsystem/
 *Entity-Relationship diagram: User ↔ Booking ↔ Bus; User ↔ Notification; User ↔ Preferences*
 
 ![State Diagram – Booking](./img/State_booking.png)
+
 *States for a booking: created → confirmed → canceled*
 
 ![Activity Diagram – Booking Flow](./img/activity_state_booking.png)
+
 *Activities through the booking process*
 
 **Core entities (simplified):**
@@ -425,7 +428,6 @@ POST /api/buses/get
 ## 🔔 Notifications & Preferences
 
 ![Notifications](./img/notification.png)
-*Placeholder — Notifications list & Preferences UI*
 
 * **Creation:** Server creates notifications on events (e.g., booking confirmed).
 * **Fetching:** Client fetches periodically (polling) and on user actions.
@@ -518,6 +520,7 @@ This project is released under the **MIT License** — see [LICENSE](./LICENSE).
   ![Seat Selection](./img/seat_booking.png)
 
 * **Notifications & Preferences**
+  
   ![Notifications](./img/notification.png)
 
 * **Admin: Buses / Bookings / Users**
